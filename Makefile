@@ -6,7 +6,7 @@
 #    By: cschabra <cschabra@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/10/13 18:15:02 by cschabra      #+#    #+#                  #
-#    Updated: 2023/03/13 15:37:37 by cschabra      ########   odam.nl          #
+#    Updated: 2023/03/14 15:24:11 by cschabra      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ LIBFT= 42lib
 HEADERS= -I include -I $(LIBFT)/include
 LIBS= $(LIBFT)/libft.a
 
-CFILES= ./src/a.c \
+CFILES= ./src/filecheck.c \
 ./src/main.c
 
 OBJECTS= $(CFILES:.c=.o)

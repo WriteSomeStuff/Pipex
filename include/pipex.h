@@ -6,7 +6,7 @@
 /*   By: cschabra <cschabra@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/09 14:06:19 by cschabra      #+#    #+#                 */
-/*   Updated: 2023/03/13 13:52:11 by cschabra      ########   odam.nl         */
+/*   Updated: 2023/03/14 15:04:19 by cschabra      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,7 @@
 # define PIPEX_H
 # include "libft.h"
 # include <sys/wait.h>
+
+int32_t	filecheck(int32_t argc, char **argv);
 
 #endif
