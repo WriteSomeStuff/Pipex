@@ -6,7 +6,7 @@
 /*   By: cschabra <cschabra@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/17 13:54:54 by cschabra      #+#    #+#                 */
-/*   Updated: 2022/10/19 16:43:57 by cschabra      ########   odam.nl         */
+/*   Updated: 2023/03/22 13:12:52 by cschabra      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
  * @return char* The string created from the successive applications
  * of ’f’. Returns NULL if the allocation fails.
  */
-char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
+char	*ft_strmapi(const char *s, char (*f)(unsigned int, char))
 {
 	int		slen;
 	int		i;
@@ -52,7 +52,7 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 
 // int	main(void)
 // {
-// 	char const *s = "aaaaaaa";
+// 	const char *s = "aaaaaaa";
 // 	char *string = ft_strmapi(s, &ft_test);
 // 	printf("%s", string);
 // 	// system("leaks a.out");

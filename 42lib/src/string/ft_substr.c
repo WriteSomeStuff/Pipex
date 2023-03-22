@@ -6,7 +6,7 @@
 /*   By: cschabra <cschabra@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/12 11:06:50 by cschabra      #+#    #+#                 */
-/*   Updated: 2022/10/21 11:29:41 by cschabra      ########   odam.nl         */
+/*   Updated: 2023/03/22 13:12:52 by cschabra      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
  * @param len 
  * @return Char* to the substring
  */
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_substr(const char *s, unsigned int start, size_t len)
 {
 	size_t	slen;
 	char	*p;
@@ -43,7 +43,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 
 // int	main(void)
 // {
-// 	char const		*s = "hola";
+// 	const char		*s = "hola";
 // 	unsigned int	start = 0;
 // 	size_t			len = 6;
 // 	char *ans = ft_substr(s, start, len);

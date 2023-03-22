@@ -6,7 +6,7 @@
 /*   By: cschabra <cschabra@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/12 13:37:00 by cschabra      #+#    #+#                 */
-/*   Updated: 2022/10/19 16:41:58 by cschabra      ########   odam.nl         */
+/*   Updated: 2023/03/22 13:12:52 by cschabra      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
  * @param s2 
  * @return Char* to the new string. NULL if the allocation fails.
  */
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(const char *s1, const char *s2)
 {
 	size_t	i;
 	size_t	j;
@@ -51,8 +51,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 // int	main(void)
 // {
-// 	char const	*s1 = "";
-// 	char const	*s2 = "abcd";
+// 	const char	*s1 = "";
+// 	const char	*s2 = "abcd";
 // 	char *ans = ft_strjoin(s1, s2);
 
 // 	printf("%s", ans);

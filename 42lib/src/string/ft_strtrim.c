@@ -6,7 +6,7 @@
 /*   By: cschabra <cschabra@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/12 15:43:45 by cschabra      #+#    #+#                 */
-/*   Updated: 2022/10/20 18:34:23 by cschabra      ########   odam.nl         */
+/*   Updated: 2023/03/22 13:12:52 by cschabra      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
  * @param set 
  * @return Char* to the trimmed string. NULL if the allocation fails.
  */
-char	*ft_strtrim(char const *s1, char const *set)
+char	*ft_strtrim(const char *s1, const char *set)
 {
 	size_t	front;
 	size_t	back;
@@ -48,8 +48,8 @@ char	*ft_strtrim(char const *s1, char const *set)
 
 // int	main(void)
 // {
-// 	char const *s1 = "daabaacaremove badc somethingaacabad";
-// 	char const *set = "abcd";
+// 	const char *s1 = "daabaacaremove badc somethingaacabad";
+// 	const char *set = "abcd";
 // 	char *ans = ft_strtrim(s1, set);
 
 // 	printf("%s", ans);

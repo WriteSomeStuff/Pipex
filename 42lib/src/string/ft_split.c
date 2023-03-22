@@ -6,13 +6,13 @@
 /*   By: cschabra <cschabra@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/12 17:56:08 by cschabra      #+#    #+#                 */
-/*   Updated: 2022/10/21 11:26:48 by cschabra      ########   odam.nl         */
+/*   Updated: 2023/03/22 13:13:30 by cschabra      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "/Users/cschabra/Documents/Pipex/Pipex/42lib/include/libft.h"
 
-static int	ft_wordcount(char const *s, char c)
+static int	ft_wordcount(const char *s, char c)
 {
 	int	i;
 	int	count;
@@ -33,7 +33,7 @@ static int	ft_wordcount(char const *s, char c)
 	return (count);
 }
 
-static int	ft_wordlen(char const *s, char c, int i)
+static int	ft_wordlen(const char *s, char c, int i)
 {
 	int	wordl;
 
@@ -67,7 +67,7 @@ static char	**ft_free(char **ans, int j)
  * @return char** The array of new strings resulting from the split else 
  * NULL if the allocation fails.
  */
-char	**ft_split(char const *s, char c)
+char	**ft_split(const char *s, char c)
 {
 	int		i;
 	int		j;
@@ -98,7 +98,7 @@ char	**ft_split(char const *s, char c)
 
 // int	main(void)
 // {
-// 	char const	s[] = "  \nSplit   This pls     ";
+// 	const char	s[] = "  \nSplit   This pls     ";
 // 	char	c = ' ';
 // 	char **arr = ft_split(s, c);
 
