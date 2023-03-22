@@ -6,7 +6,7 @@
 /*   By: cschabra <cschabra@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/09 14:09:19 by cschabra      #+#    #+#                 */
-/*   Updated: 2023/03/20 12:42:21 by cschabra      ########   odam.nl         */
+/*   Updated: 2023/03/21 15:55:24 by cschabra      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,6 @@
 // strerror, access, dup, dup2, execve, exit, fork, pipe, unlink, wait, waitpid
 int32_t	main(int32_t argc, char **argv, char **envp)
 {
-	int		i;
-
-	i = 1;
 	if (argc < 5)
 	{
 		ft_putendl_fd("try: ./pipex infile_name \"cmd1\" \"cmd2\" outfile_name", \

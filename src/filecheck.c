@@ -6,7 +6,7 @@
 /*   By: cschabra <cschabra@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/09 14:05:55 by cschabra      #+#    #+#                 */
-/*   Updated: 2023/03/20 15:28:14 by cschabra      ########   odam.nl         */
+/*   Updated: 2023/03/22 12:06:38 by cschabra      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,69 +71,85 @@ void	ft_findexec(char *argv, char **envp)
 	exit(127);
 }
 
-int32_t	ft_getlastcmd(char **argv)
-{
-	int32_t	i;
-
-	i = 0;
-	while(argv[i])
-		i++;
-	return (i);
-}
-
 void	ft_filecheck(int32_t argc, char **argv, char **envp)
 {
-	int32_t	fd[2]; // for pipe, fd[0] - read, fd[1] - write
-	int32_t	fdin; // file1 becoming stdin fileno
-	int32_t	fdout; // file2 becoming stdout fileno
+	int32_t	fd1[2]; // for pipe, fd1[0] - read, fd1[1] - write
+	int32_t	fd2[2];
+	int32_t	fdin;
+	int32_t	fdout;
 	pid_t	pid;
 	int32_t	stat;
 	int32_t	statcode;
 	int32_t	i;
 	int32_t	lastcmd;
+	int32_t	pidstat;
 
 	i = 2;
-	lastcmd = ft_getlastcmd(argv) - 2;
-	printf("%i\n", lastcmd);
-	fdin = open(argv[1], O_RDONLY);
-	if (fdin == -1)
-		ft_throwerror("fdin error", errno);
-	if (dup2(fdin, STDIN_FILENO) == -1 || close(fdin) == -1)
-		ft_throwerror("fdin error", errno);
-	fdout = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, 0666);
-	if (fdout == -1)
-		ft_throwerror("child fdout error", errno);
-	if (dup2(fdout, STDOUT_FILENO) == -1 || close(fdout) == -1)
-		ft_throwerror("child fdout error", errno);
-	if (pipe(fd) == -1)
+	lastcmd = argc - 2;
+	if (pipe(fd1) == -1 || pipe(fd2) == -1)
 		ft_throwerror("pipe error", errno);
-	pid = fork();
-	if (pid == -1)
-		ft_throwerror("fork error", errno);
-	if (pid == 0)
+	while (i <= lastcmd)
 	{
-		ft_findexec(argv[i], envp);
+		pid = fork();
+		if (pid == -1)
+			ft_throwerror("fork error", errno);
+		printf("%i\n", pid);
+		if (pid == 0)
+		{
+			if (i == 2)
+			{
+				puts("first cmd child");
+				close(fd1[0]);
+				close(fd2[0]);
+				close(fd2[1]);
+				fdin = open(argv[1], O_RDONLY);
+				if (fdin == -1)
+					ft_throwerror("fdin error", errno);
+				if (dup2(fdin, STDIN_FILENO) == -1 || close(fdin) == -1)
+					ft_throwerror("fdin error", errno);
+				if (dup2(fd1[1], STDOUT_FILENO) == -1 || close(fd1[1]) == -1)
+					ft_throwerror("child fdout error", errno);
+			}
+			else if (i > 2 && i < lastcmd)
+			{
+				puts("middle cmd child");
+				close(fd1[1]);
+				close(fd2[0]);
+				if (dup2(fd1[0], STDIN_FILENO) == -1 || close(fd1[0]) == -1)
+					ft_throwerror("fdin error", errno);
+				if (dup2(fd2[1], STDOUT_FILENO) == -1 || close(fd2[1]) == -1)
+					ft_throwerror("child fdout error", errno);
+			}
+			else if (i == lastcmd)
+			{
+				puts("last cmd child");
+				close(fd1[0]);
+				close(fd1[1]);
+				close(fd2[1]);
+				fdout = open(argv[lastcmd + 1], O_WRONLY | O_CREAT | O_TRUNC, 0666);
+				if (fdout == -1)
+					ft_throwerror("child fdout error", errno);
+				if (dup2(fdout, STDOUT_FILENO) == -1 || close(fdout) == -1)
+					ft_throwerror("child fdout error", errno);
+				if (dup2(fd2[0], STDIN_FILENO) == -1 || close(fd2[0]) == -1)
+					ft_throwerror("fdin error", errno);
+			}
+			ft_findexec(argv[i], envp);
+		}
+		sleep(1);
+		i++;
 	}
-	i++;
-	waitpid(pid, &stat, 0);
+	close(fd1[0]);
+	close(fd1[1]);
+	close(fd2[0]);
+	close(fd2[1]);
+	pidstat = waitpid(pid, &stat, 0);
+	printf("%i\n", pidstat);
 	if (WIFEXITED(stat))
 	{
 		statcode = WEXITSTATUS(stat);
 		if (statcode != 0)
 			ft_throwerror("command not found", statcode);
+		exit(statcode);
 	}
-		// fdout = open(argv[4], O_RDONLY);
-		// if (fdout == -1)
-		// 	ft_throwerror("parent fdout error", errno);
-		// while (ans)
-		// {
-		// 	ans = get_next_line(fdout);
-		// 	if (ans)
-		// 		ft_putstr_fd(ans, STDOUT_FILENO);
-		// }
-		// if (close(fdout) == -1)
-		// 	ft_throwerror("parent fdout error", errno);
-	argc = 0;
-	close(fd[0]);
-	close(fd[1]);
 }
