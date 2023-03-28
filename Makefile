@@ -6,7 +6,7 @@
 #    By: cschabra <cschabra@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/10/13 18:15:02 by cschabra      #+#    #+#                  #
-#    Updated: 2023/03/16 17:48:59 by cschabra      ########   odam.nl          #
+#    Updated: 2023/03/28 17:41:18 by cschabra      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,9 @@ LIBFT= 42lib
 HEADERS= -I include -I $(LIBFT)/include
 LIBS= $(LIBFT)/libft.a
 
-CFILES= ./src/filecheck.c \
+CFILES= ./src/childproc.c \
+./src/errors.c \
+./src/findexec.c \
 ./src/main.c
 
 OBJECTS= $(CFILES:.c=.o)

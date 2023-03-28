@@ -6,7 +6,7 @@
 /*   By: cschabra <cschabra@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/09 14:06:19 by cschabra      #+#    #+#                 */
-/*   Updated: 2023/03/16 16:28:55 by cschabra      ########   odam.nl         */
+/*   Updated: 2023/03/28 18:12:50 by cschabra      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,34 @@
 # include <sys/wait.h>
 # include <sys/types.h>
 
-void	ft_filecheck(int32_t argc, char **argv, char **envp);
+typedef struct file
+{
+	int32_t	fd1[2];
+	int32_t	fd2[2];
+	int32_t	fdin;
+	int32_t	fdout;
+}	t_file;
+
+typedef struct arg
+{
+	int32_t	argc;
+	char	**argv;
+	char	**envp;
+}	t_arg;
+
+typedef struct id
+{
+	pid_t	pid;
+	int32_t	stat;
+	int32_t	statcode;
+	int32_t	pidstat;
+}	t_id;
+
+void	ft_makechildren(t_arg *arg, t_file *file, t_id *pid);
+
+void	ft_inputcheck(int32_t argc);
+void	ft_throwerror(char *message, int32_t ernr);
+
+void	ft_findexec(char *argv, char **envp);
 
 #endif

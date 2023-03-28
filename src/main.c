@@ -6,28 +6,32 @@
 /*   By: cschabra <cschabra@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/09 14:09:19 by cschabra      #+#    #+#                 */
-/*   Updated: 2023/03/21 15:55:24 by cschabra      ########   odam.nl         */
+/*   Updated: 2023/03/28 17:39:09 by cschabra      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-// void	ft_leaks(void)
-// {
-// 	system("leaks -q pipex");
-// }
-	// atexit(ft_leaks);
-
-// allowed functions: open, close, read, write, malloc, free, perror,
-// strerror, access, dup, dup2, execve, exit, fork, pipe, unlink, wait, waitpid
 int32_t	main(int32_t argc, char **argv, char **envp)
 {
-	if (argc < 5)
+	t_file	file;
+	t_id	pid;
+	t_arg	arg;
+
+	arg = (t_arg){.argc = argc, .argv = argv, .envp = envp};
+	ft_inputcheck(argc);
+	if (pipe(file.fd1) == -1 || pipe(file.fd2) == -1)
+		ft_throwerror("pipe error", errno);
+	ft_makechildren(&arg, &file, &pid);
+	if (close(file.fd1[0]) == -1 || close(file.fd1[1]) == -1 || \
+		close(file.fd2[0]) == -1 || close(file.fd2[1]) == -1)
+		ft_throwerror("close", errno);
+	pid.pidstat = waitpid(pid.pid, &pid.stat, 0);
+	if (WIFEXITED(pid.stat))
 	{
-		ft_putendl_fd("try: ./pipex infile_name \"cmd1\" \"cmd2\" outfile_name", \
-		STDERR_FILENO);
-		return (EXIT_FAILURE);
+		pid.statcode = WEXITSTATUS(pid.stat);
+		if (pid.statcode != 0)
+			ft_throwerror("", pid.statcode);
+		exit(pid.statcode);
 	}
-	ft_filecheck(argc, argv, envp);
-	return (0);
 }
