@@ -12,29 +12,21 @@
 
 #include "pipex.h"
 
-void	ft_findexec(char *argv, char **envp)
+static void	ft_access_and_exec(char	*path, char **cmd, char **envp)
 {
-	int32_t	i;
-	char	**path;
-	char	*temp;
-	char	*cmdpath;
-	char	**cmd;
-
-	i = 0;
-	cmd = ft_split(argv, ' ');
-	if (!cmd)
-		ft_throwerror("split error", EXIT_FAILURE);
-	if (access(argv, F_OK) == 0)
+	if (access(path, F_OK) == 0)
 	{
-		if (execve(argv, cmd, envp) == -1)
+		if (execve(path, cmd, envp) == -1)
 			ft_throwerror("execve error", errno);
 	}
-	while (envp[i])
-	{
-		if (ft_strncmp(envp[i], "PATH=", 5) == 0)
-			path = ft_split(envp[i] + 5, ':');
-		i++;
-	}
+}
+
+static void	ft_try_paths(char **path, char **cmd, char **envp)
+{
+	int32_t	i;
+	char	*cmdpath;
+	char	*temp;
+	
 	i = 0;
 	while (path[i])
 	{
@@ -48,13 +40,29 @@ void	ft_findexec(char *argv, char **envp)
 			ft_throwerror("strjoin error cmdpath", EXIT_FAILURE);
 		}
 		free(temp);
-		if (access(cmdpath, F_OK) == 0)
-		{
-			if (execve(cmdpath, cmd, envp) == -1)
-				ft_throwerror("exec error", errno);
-		}
+		ft_access_and_exec(cmdpath, cmd, envp);
 		i++;
 	}
+}
+
+void	ft_findexec(char *argv, char **envp)
+{
+	int32_t	i;
+	char	**path;
+	char	**cmd;
+
+	i = 0;
+	cmd = ft_split(argv, ' ');
+	if (!cmd)
+		ft_throwerror("split error", EXIT_FAILURE);
+	ft_access_and_exec(argv, cmd, envp);
+	while (envp[i])
+	{
+		if (ft_strncmp(envp[i], "PATH=", 5) == 0)
+			path = ft_split(envp[i] + 5, ':');
+		i++;
+	}
+	ft_try_paths(path, cmd, envp);
 	ft_putendl_fd("command not found", STDERR_FILENO);
 	exit(127);
 }
