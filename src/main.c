@@ -31,7 +31,6 @@ int32_t	main(int32_t argc, char **argv, char **envp)
 	{
 		pid.statcode = WEXITSTATUS(pid.stat);
 		if (pid.statcode != 0)
-			ft_throwerror("", pid.statcode);
-		exit(pid.statcode);
+			exit(pid.statcode);
 	}
 }
