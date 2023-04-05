@@ -39,7 +39,7 @@ void	ft_cmdcheck(char *argv)
 
 void	ft_inputcheck(int32_t argc)
 {
-	if (argc != 5)
+	if (argc < 5)
 	{
 		ft_putendl_fd("try: ./pipex infile_name \"cmd1\" \"cmd2\" outfile_name", \
 		STDERR_FILENO);
