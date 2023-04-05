@@ -6,7 +6,7 @@
 /*   By: cschabra <cschabra@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/28 17:38:13 by cschabra      #+#    #+#                 */
-/*   Updated: 2023/04/05 10:50:04 by cschabra      ########   odam.nl         */
+/*   Updated: 2023/04/05 11:12:58 by cschabra      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	ft_throwerror(char *message, int32_t ernr)
 {
 	if (ernr == 127)
 		exit(ernr);
-	message = 0;
 	perror(message);
 	exit(ernr);
 }
