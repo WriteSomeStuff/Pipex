@@ -6,7 +6,7 @@
 /*   By: cschabra <cschabra@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/09 14:06:19 by cschabra      #+#    #+#                 */
-/*   Updated: 2023/04/05 12:55:31 by cschabra      ########   odam.nl         */
+/*   Updated: 2023/04/05 18:31:35 by cschabra      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 typedef struct file
 {
 	int32_t	fd1[2];
-	int32_t	fd2[2];
 	int32_t	fdin;
 	int32_t	fdout;
 }	t_file;
@@ -42,6 +41,7 @@ typedef struct id
 
 void	ft_makechildren(t_arg *arg, t_file *file, t_id *pid);
 
+void	ft_cmdcheck(char *argv);
 void	ft_inputcheck(int32_t argc);
 void	ft_throwerror(char *message, int32_t ernr);
 

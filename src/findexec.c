@@ -6,7 +6,7 @@
 /*   By: cschabra <cschabra@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/28 17:34:07 by cschabra      #+#    #+#                 */
-/*   Updated: 2023/04/05 13:11:00 by cschabra      ########   odam.nl         */
+/*   Updated: 2023/04/05 18:28:14 by cschabra      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	ft_findexec(char *argv, char **envp)
 	char	**cmd;
 
 	i = 0;
+	ft_cmdcheck(argv);
 	cmd = ft_split(argv, ' ');
 	if (!cmd)
 		ft_throwerror("split error", -1);

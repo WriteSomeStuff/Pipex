@@ -6,7 +6,7 @@
 /*   By: cschabra <cschabra@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/09 14:09:19 by cschabra      #+#    #+#                 */
-/*   Updated: 2023/04/05 13:02:58 by cschabra      ########   odam.nl         */
+/*   Updated: 2023/04/05 18:32:55 by cschabra      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,10 @@ int32_t	main(int32_t argc, char **argv, char **envp)
 
 	arg = (t_arg){.argc = argc, .argv = argv, .envp = envp};
 	ft_inputcheck(argc);
-	if (pipe(file.fd1) == -1 || pipe(file.fd2) == -1)
+	if (pipe(file.fd1) == -1)
 		ft_throwerror("pipe error in main", errno);
 	ft_makechildren(&arg, &file, &pid);
-	if (close(file.fd1[0]) == -1 || close(file.fd1[1]) == -1 || \
-		close(file.fd2[0]) == -1 || close(file.fd2[1]) == -1)
+	if (close(file.fd1[0]) == -1 || close(file.fd1[1]) == -1)
 		ft_throwerror("close error in main", errno);
 	pid.pidstat = waitpid(pid.pid, &pid.stat, 0);
 	if (WIFEXITED(pid.stat))
