@@ -6,7 +6,7 @@
 /*   By: cschabra <cschabra@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/09 14:09:19 by cschabra      #+#    #+#                 */
-/*   Updated: 2023/03/28 17:39:09 by cschabra      ########   odam.nl         */
+/*   Updated: 2023/04/05 11:01:21 by cschabra      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,5 @@ int32_t	main(int32_t argc, char **argv, char **envp)
 		if (pid.statcode != 0)
 			exit(pid.statcode);
 	}
+	return (0);
 }

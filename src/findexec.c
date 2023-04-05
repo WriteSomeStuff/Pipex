@@ -6,7 +6,7 @@
 /*   By: cschabra <cschabra@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/28 17:34:07 by cschabra      #+#    #+#                 */
-/*   Updated: 2023/03/28 17:35:21 by cschabra      ########   odam.nl         */
+/*   Updated: 2023/04/05 10:48:39 by cschabra      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	ft_try_paths(char **path, char **cmd, char **envp)
 	int32_t	i;
 	char	*cmdpath;
 	char	*temp;
-	
+
 	i = 0;
 	while (path[i])
 	{
